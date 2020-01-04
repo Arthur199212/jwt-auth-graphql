@@ -1,0 +1,16 @@
+{
+  "name": "jwt-auth-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "up": "docker-compose up -d",
+    "postup": "npm run dev",
+    "stop": "docker-compose stop",
+    "down": "docker-compose down",
+    "dev": "npm run dev --prefix api"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
