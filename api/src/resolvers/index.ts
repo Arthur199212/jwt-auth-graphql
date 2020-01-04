@@ -1,5 +1,6 @@
 import { User } from '../models'
 import { registerSchema } from '../validation'
+import { compare } from 'bcryptjs'
 
 const resolver = {
   Query: {
@@ -18,6 +19,19 @@ const resolver = {
       const user = await User.create({
         email, password
       })
+
+      return user
+    },
+    login: async (parent: any, args: any, ctx: any, info: any) => {
+      const { email, password } = args
+
+      const user = await User.findOne({ email })
+
+      if (!user) throw new Error('Invalid login')
+
+      const isValid = await compare(password, user.password)
+
+      if (!isValid) throw new Error('Invalid password')
 
       return user
     }
