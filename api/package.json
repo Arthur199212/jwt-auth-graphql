@@ -13,12 +13,16 @@
     "apollo-server-express": "^2.9.15",
     "express": "^4.17.1",
     "mongoose": "^5.8.4",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "@hapi/joi": "^17.0.0",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",
     "@types/mongoose": "^5.5.38",
     "@types/node": "^13.1.4",
-    "ts-node-dev": "^1.0.0-pre.44"
+    "ts-node-dev": "^1.0.0-pre.44",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/hapi__joi": "^16.0.6"
   }
 }
