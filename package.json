@@ -18,6 +18,7 @@
     "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2"
+    "@types/bcryptjs": "^2.4.2",
+    "@types/hapi__joi": "^16.0.6"
   }
 }

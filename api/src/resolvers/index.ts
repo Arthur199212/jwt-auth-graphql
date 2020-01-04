@@ -1,13 +1,19 @@
 import { User } from '../models'
+import { registerSchema } from '../validation'
 
 const resolver = {
   Query: {
-    hello: () => 'Hello man!'
+    users: async () => await User.find({})
   },
   Mutation: {
     register: async (parent: any, args: any, ctx: any, info: any) => {
-      // TODO validation, hashing password
+      await registerSchema.validateAsync(args, { abortEarly: false })
+
       const { email, password } = args
+
+      const find = await User.exists({ email })
+
+      if (find) throw new Error('Invalid email')
 
       const user = await User.create({
         email, password
