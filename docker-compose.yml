@@ -1,15 +1,15 @@
 version: '3.1'
 
-services: 
+services:
   db:
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INIT_DATABASE: jwt-auth
-      MONGO_USER: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+      MONGO_INITDB_DATABASE: jwt-auth
+      MONGO_USERNAME: admin
       MONGO_PASSWORD: secret
-    ports: 
-      - '27017:27017'
     volumes:
-      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      - '27017:27017'

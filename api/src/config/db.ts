@@ -1,4 +1,3 @@
-
 import { ConnectionOptions } from 'mongoose'
 
 const {
@@ -6,7 +5,7 @@ const {
   MONGO_PASSWORD = 'secret',
   MONGO_HOST = 'localhost',
   MONGO_PORT = '27017',
-  MONGO_DATABASE = 'auth'
+  MONGO_DATABASE = 'jwt-auth'
 } = process.env
 
 export const MONGO_URI = `mongodb://${MONGO_USERNAME}:${
