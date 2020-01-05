@@ -1,10 +1,17 @@
+import { compare } from 'bcryptjs'
+import { Request, Response } from 'express'
 import { User } from '../models'
 import { registerSchema } from '../validation'
-import { compare } from 'bcryptjs'
+import { createAccessToken, createRefreshToken } from '../auth'
 
 const resolver = {
   Query: {
-    users: async () => await User.find({})
+    users: async (parent: any, args: any, ctx: any, info: any) => {
+      // TODO check if logged in
+      // isLogedIn()
+
+      return await User.find({})
+    }
   },
   Mutation: {
     register: async (parent: any, args: any, ctx: any, info: any) => {
@@ -22,18 +29,27 @@ const resolver = {
 
       return user
     },
-    login: async (parent: any, args: any, ctx: any, info: any) => {
+    login: async (
+        parent: any,
+        args: any,
+        { res }: { req: Request, res: Response },
+        info: any
+      ) => {
       const { email, password } = args
 
       const user = await User.findOne({ email })
 
-      if (!user) throw new Error('Invalid login')
+      if (!user) throw new Error('Invalid email')
 
       const isValid = await compare(password, user.password)
 
       if (!isValid) throw new Error('Invalid password')
 
-      return user
+      res.cookie('token', createRefreshToken(user.id), { httpOnly: true })
+
+      return {
+        accesToken: createAccessToken(user.id)
+      }
     }
   }
 }
