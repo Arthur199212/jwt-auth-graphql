@@ -2,19 +2,24 @@ import { compare } from 'bcryptjs'
 import { Request, Response } from 'express'
 import { User } from '../models'
 import { registerSchema } from '../validation'
-import { createAccessToken, createRefreshToken } from '../auth'
+import * as Auth from '../auth'
+
+interface Context {
+  req: Request,
+  res: Response
+}
 
 const resolver = {
   Query: {
-    users: async (parent: any, args: any, ctx: any, info: any) => {
+    users: async (parent: any, args: any, { req }: Context, info: any) => {
       // TODO check if logged in
-      // isLogedIn()
+      Auth.ensureSignedIn(req)
 
       return await User.find({})
     }
   },
   Mutation: {
-    register: async (parent: any, args: any, ctx: any, info: any) => {
+    register: async (parent: any, args: any, ctx: Context, info: any) => {
       await registerSchema.validateAsync(args, { abortEarly: false })
 
       const { email, password } = args
@@ -29,12 +34,9 @@ const resolver = {
 
       return user
     },
-    login: async (
-        parent: any,
-        args: any,
-        { res }: { req: Request, res: Response },
-        info: any
-      ) => {
+    login: async ( parent: any, args: any, { res }: Context, info: any) => {
+      // TODO ensureSignedOut()
+
       const { email, password } = args
 
       const user = await User.findOne({ email })
@@ -45,10 +47,10 @@ const resolver = {
 
       if (!isValid) throw new Error('Invalid password')
 
-      res.cookie('token', createRefreshToken(user.id), { httpOnly: true })
+      res.cookie('token', Auth.createRefreshToken(user.id), { httpOnly: true })
 
       return {
-        accesToken: createAccessToken(user.id)
+        accessToken: Auth.createAccessToken(user.id)
       }
     }
   }
