@@ -12,7 +12,6 @@ interface Context {
 const resolver = {
   Query: {
     users: async (parent: any, args: any, { req }: Context, info: any) => {
-      // TODO check if logged in
       Auth.ensureSignedIn(req)
 
       return await User.find({})
@@ -47,7 +46,7 @@ const resolver = {
 
       if (!isValid) throw new Error('Invalid password')
 
-      res.cookie('token', Auth.createRefreshToken(user.id), { httpOnly: true })
+      Auth.sendRefreshToken(res, user.id)
 
       return {
         accessToken: Auth.createAccessToken(user.id)

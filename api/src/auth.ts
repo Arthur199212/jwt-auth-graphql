@@ -1,5 +1,5 @@
 import { sign } from 'jsonwebtoken'
-import { Request } from 'express'
+import { Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 import {
   QUARTER_HOUR,
@@ -24,4 +24,23 @@ export const createAccessToken = (userId: string) => {
 
 export const createRefreshToken = (userId: string) => {
   return sign({ userId }, REFRESH_TOKEN_SECRET, { expiresIn: SEVEN_DAYS })
+}
+
+export const sendRefreshToken = (res: Response, userId: string) =>
+  res.cookie('token', createRefreshToken(userId), { httpOnly: true })
+
+export const verifyRefreshToken = (req: Request, res: Response) => {
+  const { token } = req.cookies
+
+  if (!token) throw new Error('Token not found')
+
+  let payload: any = { userId: '' }
+
+  try {
+    payload = verify(token, REFRESH_TOKEN_SECRET)
+  } catch (err) {
+    throw new Error('Invalid token')
+  }
+
+  return payload
 }

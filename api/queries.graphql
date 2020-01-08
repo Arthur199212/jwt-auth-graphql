@@ -1,3 +1,4 @@
+# REGISTER
 mutation {
   register(email: "mail12@mail.ru", password: "Ss1234567") {
     id
@@ -6,10 +7,16 @@ mutation {
   }
 }
 
+# GET USERS
 {
   users {
     id
     email
     createdAt
   }
+}
+
+# add http header
+{
+  "authorization": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTEwODBmNTViMDYxYzQ2NzQ2NjU1NDIiLCJpYXQiOjE1Nzg0ODA3NzcsImV4cCI6MTU3OTM4MDc3N30.TMWEx7CURWptNipM66PqyaVYSQXIUK0lbGUi0pxh-g4"
 }
