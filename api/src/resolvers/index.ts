@@ -35,6 +35,7 @@ const resolver = {
     },
     login: async ( parent: any, args: any, { res }: Context, info: any) => {
       // TODO ensureSignedOut()
+      // TODO logOut resolver
 
       const { email, password } = args
 

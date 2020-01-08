@@ -5,6 +5,9 @@ import * as Auth from '../auth'
 const router = Router()
 
 router.post('/refresh_token', async (req: Request, res: Response) => {
+  // TODO implement forgot the password
+  // TODO add white list/black list of tokens or just add token version
+
   try {
     const payload = Auth.verifyRefreshToken(req, res)
 
