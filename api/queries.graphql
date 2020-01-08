@@ -7,6 +7,13 @@ mutation {
   }
 }
 
+# LOGIN
+mutation {
+  login(email: "mail12@mail.ru", password: "Ss1234567") {
+    accessToken
+  }
+}
+
 # GET USERS
 {
   users {

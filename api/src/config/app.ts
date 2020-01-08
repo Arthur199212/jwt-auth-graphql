@@ -1,5 +1,5 @@
 export const {
-  APP_PORT = 3000,
+  APP_PORT = 3001,
   NODE_ENV = 'development'
 } = process.env
 
