@@ -19,6 +19,6 @@ curl -v -X POST localhost:3000/refresh_token --cookie "token=eyJhbGciOiJIUzI1NiI
 
 ```sh
 # Check database
-docker exec -it node-auth_db_1 mongo -u admin -p secret auth
+docker exec -it node-auth_db_1 mongo -u admin -p secret jwt-auth
 db.users.find({})
 ```
