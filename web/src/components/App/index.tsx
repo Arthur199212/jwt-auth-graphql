@@ -1,20 +1,39 @@
-import React, { useEffect } from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
-import { testQuery } from './queries'
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom'
+import { Register, Login, Home } from '../'
 
-const App: React.FC = () => {
-  const { data, loading } = useQuery(testQuery)
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
-  
-  return (
-    <div>
-      {JSON.stringify(data)}
-    </div>
-  )
-}
+const App: React.FC = () => 
+  <Router>
+    <header>
+      <ul>
+        <li>
+          <Link to='/'>Home</Link>
+        </li>
+        <li>
+          <Link to='/register'>Register</Link>
+        </li>
+        <li>
+          <Link to='/Login'>Login</Link>
+        </li>
+      </ul>
+    </header>
+    
+    <Switch>
+      <Route path='/register'>
+        <Register />
+      </Route>
+      <Route path='/login'>
+        <Login />
+      </Route>
+      <Route exact path='/'>
+        <Home />
+      </Route>
+    </Switch>
+  </Router>
 
 export default App
