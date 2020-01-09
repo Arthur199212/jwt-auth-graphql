@@ -6,8 +6,13 @@
 
 ### Back-End
 - Node + Express + TS
+- Apollo GraphQL
 - MongoDB + Mongoose
 - JSON Web Tokens (JWT)
+
+### Front-End
+- React
+- Apollo GraphQL
 
 ### curl
 
