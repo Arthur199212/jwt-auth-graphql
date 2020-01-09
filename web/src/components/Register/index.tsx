@@ -9,7 +9,10 @@ const Register: React.FC = () => {
 
   const history = useHistory()
 
-  const [register, { data }] = useMutation(REGISTER)
+  const [register] = useMutation(REGISTER)
+  // TODO error handling
+  // TODO form as a separate component
+  // TODO form validation
 
   return (
     <>

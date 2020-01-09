@@ -10,7 +10,7 @@ interface UserDocument {
 }
 
 const Home: React.FC = () => {
-  const { loading, error, data, refetch } = useQuery(GET_USERS, {
+  const { loading, error, data } = useQuery(GET_USERS, {
     fetchPolicy: 'network-only'
   })
 
