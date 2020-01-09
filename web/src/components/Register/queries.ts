@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost'
+import { gql } from '@apollo/client'
 
 export const REGISTER = gql`
   mutation Register($email: String!, $password: String!){

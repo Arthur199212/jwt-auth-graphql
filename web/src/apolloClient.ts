@@ -3,7 +3,7 @@ import {
   HttpLink,
   InMemoryCache,
   ApolloLink
-} from 'apollo-boost'
+} from '@apollo/client'
 import { getAccessToken } from './auth'
 
 const httpLink = new HttpLink({
