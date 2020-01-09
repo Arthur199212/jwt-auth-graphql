@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { REGISTER } from './queries'
-import { RouteComponentProps } from 'react-router-dom'
 
-const Register: React.FC<RouteComponentProps> = ({ history }) => {
+const Register: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const history = useHistory()
 
   const [register, { data }] = useMutation(REGISTER)
 
