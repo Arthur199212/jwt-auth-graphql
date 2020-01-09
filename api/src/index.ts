@@ -17,7 +17,7 @@ import typeDefs from './typeDefs'
   
     const app = createApp()
 
-    server.applyMiddleware({ app, path: '/graphql' })
+    server.applyMiddleware({ app, path: '/graphql', cors: false })
 
     app.listen(APP_PORT, () => console.log(`Server ready at http://localhost:${APP_PORT}${server.graphqlPath}`))
   } catch (err) {
