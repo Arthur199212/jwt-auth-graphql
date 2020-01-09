@@ -4,6 +4,7 @@ import {
   InMemoryCache,
   ApolloLink
 } from 'apollo-boost'
+import { getAccessToken } from './auth'
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -11,13 +12,11 @@ const httpLink = new HttpLink({
 })
 
 const authLink = new ApolloLink((operation, forward) => {
-  const token = localStorage.getItem('auth_token')
-
-  if (!token) return forward(operation)
+  const accessToken = getAccessToken()
 
   operation.setContext({
     headers: {
-      authorization: token ? `Bearer ${JSON.parse(token)}` : ''
+      authorization: accessToken ? `Bearer ${accessToken}` : ''
     }
   })
 

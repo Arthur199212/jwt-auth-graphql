@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { LOGIN } from './queries'
+import { setAccessToken } from '../../auth'
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -23,9 +24,9 @@ const Login: React.FC = () => {
         try {
           const res = await login({ variables: { email, password } })
 
-          const authToken = JSON.stringify(res.data.login.accessToken)
+          const accessToken = res.data.login.accessToken
 
-          localStorage.setItem('auth_token', authToken)
+          setAccessToken(accessToken)
 
           setEmail('')
           setPassword('')
