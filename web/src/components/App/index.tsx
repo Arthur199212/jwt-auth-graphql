@@ -6,9 +6,7 @@ import {
   Link
 } from 'react-router-dom'
 import { Register, Login, Home } from '../'
-import { setAccessToken } from '../../auth'
-
-const URL_REFRESH_TOKEN = 'http://localhost:3001/refresh_token'
+import { URL_REFRESH_TOKEN, setAccessToken } from '../../auth'
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true)
@@ -19,9 +17,9 @@ const App: React.FC = () => {
       method: 'POST'
     })
       .then(async res => {
-        const data = await res.json()
+        const { accessToken } = await res.json()
 
-        setAccessToken(data.accessToken)
+        setAccessToken(accessToken)
 
         setLoading(false)
       })

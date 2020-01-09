@@ -24,7 +24,7 @@ const Login: React.FC = () => {
         try {
           const res = await login({ variables: { email, password } })
 
-          const accessToken = res.data.login.accessToken
+          const { accessToken } = res.data.login
 
           setAccessToken(accessToken)
 
