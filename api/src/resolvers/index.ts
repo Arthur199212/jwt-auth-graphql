@@ -11,7 +11,6 @@ interface Context {
 
 const resolver = {
   Query: {
-    test: () => 'Hello',
     users: async (parent: any, args: any, { req }: Context, info: any) => {
       Auth.ensureSignedIn(req)
 
