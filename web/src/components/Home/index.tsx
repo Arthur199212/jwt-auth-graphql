@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_USERS } from './queries'
+import { refreshAccessToken } from '../../auth'
 
 interface UserDocument {
   id: string,
@@ -10,9 +11,11 @@ interface UserDocument {
 }
 
 const Home: React.FC = () => {
-  const { loading, error, data } = useQuery(GET_USERS, {
+  const { loading, error, data, refetch } = useQuery(GET_USERS, {
     fetchPolicy: 'network-only'
   })
+
+  if (error) refreshAccessToken(refetch)
 
   if (!data || loading || error) return <div>Home Page</div>
 

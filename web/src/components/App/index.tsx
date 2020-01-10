@@ -6,24 +6,14 @@ import {
   Link
 } from 'react-router-dom'
 import { Register, Login, Home } from '../'
-import { URL_REFRESH_TOKEN, setAccessToken } from '../../auth'
+import { refreshAccessToken } from '../../auth'
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(URL_REFRESH_TOKEN, {
-      credentials: 'include',
-      method: 'POST'
-    })
-      .then(async res => {
-        const { accessToken } = await res.json()
-
-        setAccessToken(accessToken)
-
-        setLoading(false)
-      })
-      .catch(err => console.log(err))
+    refreshAccessToken()
+    .finally(() => setLoading(false))
   }, [])
 
   if (loading) return <div>Loading...</div>
