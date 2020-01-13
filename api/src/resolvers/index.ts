@@ -35,7 +35,6 @@ const resolver = {
     },
     login: async ( parent: any, args: any, { res }: Context, info: any) => {
       // TODO ensureSignedOut()
-      // TODO logOut resolver
 
       const { email, password } = args
 
@@ -52,6 +51,11 @@ const resolver = {
       return {
         accessToken: Auth.createAccessToken(user.id)
       }
+    },
+    logout: (parent: any, args: any, { res }: Context, info: any) => {
+      Auth.resetRefreshToken(res)
+
+      return true
     }
   }
 }

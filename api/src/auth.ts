@@ -29,6 +29,9 @@ export const createRefreshToken = (userId: string) => {
 export const sendRefreshToken = (res: Response, userId: string) =>
   res.cookie('token', createRefreshToken(userId), { httpOnly: true })
 
+export const resetRefreshToken = (res: Response) =>
+  res.cookie('token', '', { httpOnly: true })
+
 export const verifyRefreshToken = (req: Request, res: Response) => {
   const { token } = req.cookies
 
