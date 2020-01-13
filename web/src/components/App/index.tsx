@@ -5,11 +5,14 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import { useMutation } from '@apollo/client'
 import { Register, Login, Home } from '../'
-import { refreshAccessToken } from '../../auth'
+import { refreshAccessToken, setAccessToken } from '../../auth'
+import { LOGOUT } from './queries'
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true)
+  const [logout, { client }] = useMutation(LOGOUT)
 
   useEffect(() => {
     refreshAccessToken()
@@ -30,6 +33,21 @@ const App: React.FC = () => {
         </li>
         <li>
           <Link to='/Login'>Login</Link>
+        </li>
+        <li>
+          <button
+            onClick={async () => {
+              try {
+                await logout()
+                setAccessToken('')
+                await client?.resetStore()
+              } catch (err) {
+                console.log(err.message)
+              }
+            }}
+          >
+            Logout
+          </button>
         </li>
       </ul>
     </header>

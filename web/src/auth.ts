@@ -9,8 +9,8 @@ export const getAccessToken = () => accesToken
 export const refreshAccessToken = async (refetch?: any) => {
   try {
     const res = await fetch(URL_REFRESH_TOKEN, {
-      credentials: 'include',
-      method: 'POST'
+      method: 'POST',
+      credentials: 'include'
     })
     
     const { accessToken } = await res.json()

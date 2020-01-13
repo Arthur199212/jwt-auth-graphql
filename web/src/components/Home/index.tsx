@@ -15,7 +15,7 @@ const Home: React.FC = () => {
     fetchPolicy: 'network-only'
   })
 
-  if (error) refreshAccessToken(refetch)
+  if (error) refreshAccessToken(refetch) // TODO create a middleware to handle it
 
   if (!data || loading || error) return <div>Home Page</div>
 
